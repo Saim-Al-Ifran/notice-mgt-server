@@ -14,10 +14,17 @@ const noticeSchema = new mongoose_1.Schema({
         required: true,
         trim: true,
     },
-    employeeDetails: {
-        employeeId: String,
-        employeeName: String,
-        position: String,
+    employeeId: {
+        type: String,
+        required: false,
+    },
+    employeeName: {
+        type: String,
+        required: false,
+    },
+    position: {
+        type: String,
+        required: false,
     },
     noticeType: {
         type: String,

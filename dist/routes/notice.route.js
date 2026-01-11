@@ -4,7 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const notice_route_1 = __importDefault(require("./notice.route"));
+const multer_1 = __importDefault(require("multer"));
+const notice_controller_1 = require("../controllers/notice.controller");
 const router = (0, express_1.Router)();
-router.use('/api/v1/notice', notice_route_1.default);
+const upload = (0, multer_1.default)(); // memory storage by default
+// POST /api/notices
+router.post("/notices", upload.single("attachment"), notice_controller_1.saveNotice);
 exports.default = router;

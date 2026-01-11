@@ -1,21 +1,15 @@
 import { Schema, model, Document } from "mongoose";
 
-/**
- * Employee details sub-document
- */
-interface IEmployeeDetails {
-  employeeId?: string;
-  employeeName?: string;
-  position?: string;
-}
-
+ 
 /**
  * Main Notice document interface
  */
 export interface INotice extends Document {
   targetRecipient: "Individual" | "Department";
   noticeTitle: string;
-  employeeDetails?: IEmployeeDetails;
+  employeeId?: string;
+  employeeName?: string;
+  position?: string;
   noticeType:
     | "Warning / Disciplinary"
     | "Performance Improvement"
