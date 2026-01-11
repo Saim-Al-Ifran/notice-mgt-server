@@ -26,7 +26,7 @@ if (!CLOUDINARY_API_SECRET_KEY) {
     throw new Error('Missing CLOUDINARY_API_SECRET_KEY environment variable');
 }
 if (!JWT_REFRESH_SECRET_KEY) {
-    throw new Error('Missing CLOUDINARY_API_SECRET_KEY environment variable');
+    throw new Error('Missing JWT_REFRESH_SECRET_KEY environment variable');
 }
 exports.mongoDbUrl = MONGODB_URL;
 exports.nodeEnv = NODE_ENV;
