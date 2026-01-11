@@ -1,11 +1,22 @@
 import { Router } from "express";
 import multer from "multer";
-import { saveNotice } from "../controllers/notice.controller";
+import {
+    getAllNotices,
+    getSingleNotice,
+    saveNotice,
+    updateNoticeStatus
+} from "../controllers/notice.controller";
 
 const router = Router();
-const upload = multer(); // memory storage by default
+const upload = multer(); 
 
 // POST /api/notices
-router.post("/notices", upload.single("attachment"), saveNotice);
+router.post("/", upload.single("attachment"), saveNotice);
+// Get all notices (filter by status)
+router.get("/", getAllNotices);
+// Get single notice by ID (bonus)
+router.get("/:id", getSingleNotice);
+// Update notice status (publish / unpublish)
+router.patch("/:id/status", updateNoticeStatus);
 
 export default router;
