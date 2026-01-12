@@ -1,0 +1,282 @@
+openapi: 3.0.0
+info:
+  title: Notice Management API
+  description: API documentation for managing notices (create, list, update status, view)
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local server
+
+tags:
+  - name: Notice
+    description: Notice management endpoints
+
+paths:
+  /notice:
+    post:
+      tags:
+        - Notice
+      summary: Create a new notice
+      description: Create a notice with optional file attachment
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - targetRecipient
+                - noticeTitle
+                - noticeType
+                - noticeBody
+              properties:
+                targetRecipient:
+                  type: string
+                  enum:
+                    - Individual
+                    - Department
+                  example: Individual
+
+                noticeTitle:
+                  type: string
+                  example: Late Arrival Warning
+
+                employeeId:
+                  type: string
+                  example: EMP-1023
+
+                employeeName:
+                  type: string
+                  example: John Doe
+
+                position:
+                  type: string
+                  example: Software Engineer
+
+                noticeType:
+                  type: string
+                  enum:
+                    - Warning / Disciplinary
+                    - Performance Improvement
+                    - Appreciation / Recognition
+                    - Attendance / Leave Issue
+                    - Payroll / Compensation
+                    - Contract / Role Update
+                    - Advisory / Personal Reminder
+
+                noticeBody:
+                  type: string
+                  example: Please ensure punctuality from now on.
+
+                publishDate:
+                  type: string
+                  format: date
+                  example: 2026-01-15
+
+                status:
+                  type: string
+                  enum:
+                    - Draft
+                    - Published
+                  example: Published
+
+                file:
+                  type: string
+                  format: binary
+      responses:
+        201:
+          description: Notice created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Notice created successfully
+                  data:
+                    $ref: '#/components/schemas/Notice'
+
+    get:
+      tags:
+        - Notice
+      summary: Get all notices
+      description: Fetch all notices with pagination and optional status filter
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum:
+              - Draft
+              - Published
+          example: Published
+
+        - in: query
+          name: page
+          schema:
+            type: integer
+          example: 1
+
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          example: 10
+      responses:
+        200:
+          description: Notices fetched successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Notices fetched successfully
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notice'
+                  pagination:
+                    type: object
+                    properties:
+                      totalItems:
+                        type: integer
+                        example: 45
+                      currentPage:
+                        type: integer
+                        example: 1
+                      totalPages:
+                        type: integer
+                        example: 5
+                      pageSize:
+                        type: integer
+                        example: 10
+
+  /notice/{id}:
+    get:
+      tags:
+        - Notice
+      summary: Get a single notice
+      description: Fetch a single notice by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          example: 65a9c8e2f23c91a5c3d11abc
+      responses:
+        200:
+          description: Notice fetched successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Notice fetched successfully
+                  data:
+                    $ref: '#/components/schemas/Notice'
+        404:
+          description: Notice not found
+
+  /notice/{id}/status:
+    patch:
+      tags:
+        - Notice
+      summary: Update notice status
+      description: Publish or unpublish a notice
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          example: 65a9c8e2f23c91a5c3d11abc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - Draft
+                    - Published
+                  example: Published
+      responses:
+        200:
+          description: Notice status updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Notice status updated successfully
+                  data:
+                    $ref: '#/components/schemas/Notice'
+        400:
+          description: Invalid status value
+        404:
+          description: Notice not found
+
+components:
+  schemas:
+    Notice:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 65a9c8e2f23c91a5c3d11abc
+
+        targetRecipient:
+          type: string
+          enum:
+            - Individual
+            - Department
+
+        noticeTitle:
+          type: string
+
+        employeeId:
+          type: string
+
+        employeeName:
+          type: string
+
+        position:
+          type: string
+
+        noticeType:
+          type: string
+
+        noticeBody:
+          type: string
+
+        attachmentUrl:
+          type: string
+          example: https://res.cloudinary.com/demo/file.pdf
+
+        status:
+          type: string
+          enum:
+            - Draft
+            - Published
+
+        createdAt:
+          type: string
+          format: date-time
+
+        updatedAt:
+          type: string
+          format: date-time
