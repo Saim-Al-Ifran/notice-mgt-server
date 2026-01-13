@@ -6,7 +6,7 @@ info:
 
 servers:
   - url: https://notice-mgt-server.onrender.com/api/v1
-    description: Local server
+    description: Live server
 
 tags:
   - name: Notice
