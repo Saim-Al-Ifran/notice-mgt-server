@@ -1,22 +1,28 @@
-# Express + TypeScript Starter Kit
+# 📢 Notice Management Server
 
-This is a boilerplate project for building backend applications using Express and TypeScript. It includes essential configurations, middleware, and tools to kickstart your development process.
+A backend REST API for managing notices, built with **Express.js**, **TypeScript**, and **MongoDB**.  
+This service allows creating, publishing, unpublishing, and viewing notices with proper status handling and pagination.
 
-## Features
 
-- **TypeScript**: Static type-checking along with modern JavaScript features.
-- **Express**: Fast, unopinionated, minimalist web framework for Node.js.
-- **Mongoose**: Elegant MongoDB object modeling for Node.js.
-- **Cloudinary**: Media management for handling image uploads and delivery.
-- **Helmet**: Secure your Express apps by setting various HTTP headers.
-- **Multer**: Middleware for handling `multipart/form-data`, primarily for file uploads.
-- **JSON Web Tokens (JWT)**: Secure authentication via tokens.
-- **Express Validator**: Validation middleware for handling and validating request data.
-- **Morgan**: HTTP request logger middleware.
-- **Compression**: Gzip compression for improved performance.
-- **CORS**: Cross-Origin Resource Sharing middleware.
-- **Cookie Parser**: Parse Cookie header and populate `req.cookies`.
+🔗 **API Documentation (Swagger):**  
+https://notice-mgt-server.onrender.com/api-docs/
 
+---
+
+## 🚀 Features
+
+- Create a notice
+- Get all notices
+  - Filter by status (`published` / `draft`)
+  - Pagination support
+- Update notice status (publish / unpublish)
+- View a single notice (optional)
+- MongoDB with Mongoose
+- Swagger API documentation
+- TypeScript support
+- Production-ready folder structure
+
+---
 ## Getting Started
 
 ### Prerequisites
@@ -28,7 +34,7 @@ This is a boilerplate project for building backend applications using Express an
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/Saim-Al-Ifran/express-typescript-starter-kit.git
+    git clone https://github.com/Saim-Al-Ifran/notice-mgt-server.git
     ```
 
 2. **Navigate to the project directory:**
@@ -38,7 +44,7 @@ This is a boilerplate project for building backend applications using Express an
 
 3. **Install the dependencies:**
     ```bash
-    npm install
+    cd notice-mgt-server
     ```
 
 ### Environment Variables
