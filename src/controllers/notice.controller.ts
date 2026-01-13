@@ -7,11 +7,7 @@ export const saveNotice = TryCatch(async (req: Request, res: Response) => {
   const noticeData = req.body;
   const file = req.file;
 
-    if (!file) {
-    return res.status(400).json({
-      message: "Attachment is required",
-    });
-  }
+   
   const savedNotice = await createNotice(noticeData, file);
 
   res.status(201).json({
