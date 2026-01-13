@@ -58,8 +58,7 @@ PORT=3000
 # MongoDB
 MONGO_URI=mongodb://localhost:27017/mydatabase
 
-# JWT Secret
-JWT_SECRET=your_jwt_secret_key
+ 
 
 # Cloudinary
 CLOUDINARY_CLOUD_NAME=your_cloud_name
