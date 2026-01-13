@@ -111,6 +111,7 @@ paths:
             enum:
               - Draft
               - Published
+              - Unpublished
           example: Published
 
         - in: query

@@ -86,9 +86,9 @@ export const fetchSingleNotice = async (id: string) => {
  */
 export const changeNoticeStatus = async (
   id: string,
-  status: "Draft" | "Published"
+  status: "Draft" | "Published" | "Unpublished"
 ) => {
-  if (!["Draft", "Published"].includes(status)) {
+  if (!["Draft", "Published", "Unpublished"].includes(status)) {
     throw new CustomError("Invalid status value", 400);
   }
 

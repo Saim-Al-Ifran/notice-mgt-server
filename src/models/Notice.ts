@@ -58,7 +58,7 @@ const noticeSchema = new Schema<INotice>(
 
     status: {
       type: String,
-      enum: ["Draft", "Published"],
+      enum: ["Draft", "Published","Unpublished"],
       default: "Draft",
     },
   },

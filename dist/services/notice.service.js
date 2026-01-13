@@ -75,7 +75,7 @@ exports.fetchSingleNotice = fetchSingleNotice;
  * Update notice status
  */
 const changeNoticeStatus = (id, status) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!["Draft", "Published"].includes(status)) {
+    if (!["Draft", "Published", "Unpublished"].includes(status)) {
         throw new customError_1.default("Invalid status value", 400);
     }
     const notice = yield Notice_1.Notice.findByIdAndUpdate(id, { status }, { new: true });

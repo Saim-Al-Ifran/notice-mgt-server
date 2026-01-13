@@ -15,6 +15,11 @@ const TryCatch_1 = require("../middlewares/TryCatch");
 exports.saveNotice = (0, TryCatch_1.TryCatch)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const noticeData = req.body;
     const file = req.file;
+    if (!file) {
+        return res.status(400).json({
+            message: "Attachment is required",
+        });
+    }
     const savedNotice = yield (0, notice_service_1.createNotice)(noticeData, file);
     res.status(201).json({
         message: "Notice created successfully",
